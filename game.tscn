@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://kgaj5p2l71ut"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_pjyjd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pofso"]
+size = Vector2(20, 236)
+
+[node name="Game" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(60, 317)
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(0.999999, -1)
+scale = Vector2(19.5, 234.25)
+texture = SubResource("CanvasTexture_pjyjd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_pofso")
