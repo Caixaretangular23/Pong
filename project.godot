@@ -22,3 +22,4 @@ project/assembly_name="Pongforlearn"
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.0148461, 0.0240935, 0.11871, 1)

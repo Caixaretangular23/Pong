@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://kgaj5p2l71ut"]
+[gd_scene load_steps=8 format=3 uid="uid://kgaj5p2l71ut"]
 
-[ext_resource type="Texture2D" uid="uid://7p5es5xm3leg" path="res://icon.svg" id="1_7berg"]
 [ext_resource type="Script" path="res://Movement.cs" id="1_wu73j"]
+[ext_resource type="Script" path="res://Ball.cs" id="2_3ndkh"]
 [ext_resource type="Script" path="res://Inimie.cs" id="2_n7k5x"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_pjyjd"]
@@ -9,8 +9,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pofso"]
 size = Vector2(20, 236)
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_p24wa"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mp5kq"]
-size = Vector2(128, 128)
+size = Vector2(26, 26)
 
 [node name="Game" type="Node2D"]
 
@@ -19,6 +21,7 @@ position = Vector2(60, 317)
 script = ExtResource("1_wu73j")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
+modulate = Color(0.823148, 0.884226, 0.967732, 1)
 position = Vector2(0.999999, -1)
 scale = Vector2(19.5, 234.25)
 texture = SubResource("CanvasTexture_pjyjd")
@@ -29,11 +32,16 @@ shape = SubResource("RectangleShape2D_pofso")
 
 [node name="Ball" type="Area2D" parent="."]
 position = Vector2(560, 317)
+script = ExtResource("2_3ndkh")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ball"]
-texture = ExtResource("1_7berg")
+modulate = Color(0.823529, 0.882353, 0.968627, 1)
+position = Vector2(1.00001, -1)
+scale = Vector2(26, 26)
+texture = SubResource("CanvasTexture_p24wa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_mp5kq")
 
 [node name="Inimie" type="CharacterBody2D" parent="."]
@@ -41,6 +49,7 @@ position = Vector2(1086, 300)
 script = ExtResource("2_n7k5x")
 
 [node name="Sprite2D" type="Sprite2D" parent="Inimie"]
+modulate = Color(0.823529, 0.882353, 0.968627, 1)
 position = Vector2(-6.25, -3.875)
 scale = Vector2(19.5, 234.25)
 texture = SubResource("CanvasTexture_pjyjd")
@@ -48,3 +57,5 @@ texture = SubResource("CanvasTexture_pjyjd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Inimie"]
 position = Vector2(-7.25, -3.875)
 shape = SubResource("RectangleShape2D_pofso")
+
+[connection signal="body_entered" from="Ball" to="Ball" method="_on_body_entered"]
