@@ -25,14 +25,15 @@ public partial class Inimie : CharacterBody2D
 	public override void _Process(double delta)
 	{
 		// Atualizando a posição
-		if (Objective.Position.X < 600) ObjectiveX.Next(600,1100);
+		if (Objective.Position.X < 300) ObjectiveX.Next(300,1100);
 		GlobalPosition += (float)delta*dir*speed;
 		// Limitações
 		if (gamenode2.dir.X == 1 && Objective.Position.X > RomX)
 		{
 			yPosition = Objective.Position.Y;
 			if (GlobalPosition.Y < yPosition) dir.Y = 1;
-			if (GlobalPosition.Y >= yPosition) dir.Y = -1;
+			if (GlobalPosition.Y > yPosition) dir.Y = -1;
+			if (GlobalPosition.Y == yPosition) dir.Y = 0;
 		}
 		else
 		{

@@ -1,8 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://kgaj5p2l71ut"]
+[gd_scene load_steps=18 format=3 uid="uid://kgaj5p2l71ut"]
 
+[ext_resource type="Script" path="res://Game.cs" id="1_mabqd"]
 [ext_resource type="Script" path="res://Movement.cs" id="1_wu73j"]
 [ext_resource type="Script" path="res://Ball.cs" id="2_3ndkh"]
 [ext_resource type="Script" path="res://Inimie.cs" id="2_n7k5x"]
+[ext_resource type="AudioStream" uid="uid://d06jg71ng45lc" path="res://Sounds/Pop.mp3" id="4_1fkcm"]
+[ext_resource type="FontFile" uid="uid://doru6fpyi23mu" path="res://Mega.ttf" id="4_lnqn8"]
+[ext_resource type="AudioStream" uid="uid://dtjsxwxmj35ga" path="res://Sounds/WIN.mp3" id="5_x2q55"]
+[ext_resource type="AudioStream" uid="uid://bfgkgkq3daeah" path="res://Sounds/LOST.mp3" id="6_7i5is"]
+[ext_resource type="Texture2D" uid="uid://dy44itvcf1r28" path="res://Imagens/O comedor de natai.png" id="9_rmlp5"]
+[ext_resource type="Texture2D" uid="uid://v4wbl3ymwcqk" path="res://Imagens/R (1).png" id="10_k7gne"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_oql2j"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_pjyjd"]
 
@@ -14,7 +23,23 @@ size = Vector2(20, 236)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mp5kq"]
 size = Vector2(26, 26)
 
+[sub_resource type="LabelSettings" id="LabelSettings_7d6k3"]
+font = ExtResource("4_lnqn8")
+font_size = 70
+font_color = Color(0.823529, 0.882353, 0.968627, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sis01"]
+font = ExtResource("4_lnqn8")
+font_size = 120
+
 [node name="Game" type="Node2D"]
+script = ExtResource("1_mabqd")
+
+[node name="Line" type="Sprite2D" parent="."]
+modulate = Color(0.823529, 0.882353, 0.968627, 0.698039)
+position = Vector2(558.5, 323.5)
+scale = Vector2(17, 653)
+texture = SubResource("CanvasTexture_oql2j")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(60, 317)
@@ -44,6 +69,17 @@ texture = SubResource("CanvasTexture_p24wa")
 position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_mp5kq")
 
+[node name="Pop" type="AudioStreamPlayer" parent="Ball"]
+stream = ExtResource("4_1fkcm")
+
+[node name="Win" type="AudioStreamPlayer" parent="Ball"]
+stream = ExtResource("5_x2q55")
+volume_db = 17.0
+
+[node name="Lost" type="AudioStreamPlayer" parent="Ball"]
+stream = ExtResource("6_7i5is")
+volume_db = 17.0
+
 [node name="Inimie" type="CharacterBody2D" parent="."]
 position = Vector2(1086, 300)
 script = ExtResource("2_n7k5x")
@@ -57,5 +93,47 @@ texture = SubResource("CanvasTexture_pjyjd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Inimie"]
 position = Vector2(-7.25, -3.875)
 shape = SubResource("RectangleShape2D_pofso")
+
+[node name="PontsIni" type="Label" parent="."]
+offset_left = 841.0
+offset_top = 30.0
+offset_right = 892.0
+offset_bottom = 101.0
+text = "0"
+label_settings = SubResource("LabelSettings_7d6k3")
+horizontal_alignment = 1
+
+[node name="Pontsplayer" type="Label" parent="."]
+offset_left = 242.0
+offset_top = 22.0
+offset_right = 293.0
+offset_bottom = 93.0
+text = "0"
+label_settings = SubResource("LabelSettings_7d6k3")
+horizontal_alignment = 1
+
+[node name="OComedorDeNatais" type="Sprite2D" parent="."]
+position = Vector2(-228, 333)
+scale = Vector2(0.199063, 0.197917)
+texture = ExtResource("9_rmlp5")
+
+[node name="Win" type="Label" parent="OComedorDeNatais"]
+offset_left = -969.544
+offset_top = 722.526
+offset_right = 687.456
+offset_bottom = 967.526
+label_settings = SubResource("LabelSettings_sis01")
+
+[node name="R" type="Sprite2D" parent="."]
+position = Vector2(1335, 353)
+scale = Vector2(0.320335, 0.325837)
+texture = ExtResource("10_k7gne")
+
+[node name="Label" type="Label" parent="R"]
+offset_left = -558.79
+offset_top = 445.008
+offset_right = 407.21
+offset_bottom = 590.008
+label_settings = SubResource("LabelSettings_sis01")
 
 [connection signal="body_entered" from="Ball" to="Ball" method="_on_body_entered"]
