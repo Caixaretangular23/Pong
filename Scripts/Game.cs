@@ -3,6 +3,7 @@ using System;
 
 public partial class Game : Node2D
 {
+	public bool multiplayer = false;
 	Vector2 dir;
 	public int inipoints = 0;
 	public int playerpoints = 0;
@@ -17,6 +18,10 @@ public partial class Game : Node2D
 	Sprite2D KKKK;
 	Sprite2D Bot;
 	Ball Bola;
+
+	// Vars de som de pasos
+	AudioStreamPlayer steps;
+	bool audioactivade = false;
 	public override void _Ready()
 	{
 		Bola = GetNode<Ball>("/root/Game/Ball");
@@ -32,35 +37,66 @@ public partial class Game : Node2D
 
 		Bot = GetNode<Sprite2D>("/root/Game/R");
 		Ia = GetNode<Label>("/root/Game/R/Label");
+
+		// Sons
+		steps = GetNode<AudioStreamPlayer>("/root/Game/OComedorDeNatais/Steps");
+
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		// Definindo a pontuação
 		Label1.Text = playerpoints.ToString();
 		Label2.Text = inipoints.ToString();
 		//Saindo do jogo
-		if (Input.IsActionJustPressed("ui_cancel")) GetTree().Quit();
+		if (Input.IsActionJustPressed("ui_cancel")) GetTree().ChangeSceneToFile("res://Menu.tscn");
 		// Evento
 		if (Input.IsActionJustPressed("ui_accept") && (inipoints >= 10 || playerpoints >= 10)) GetTree().ChangeSceneToFile("res://Menu.tscn");
 		//Evento (Rafa)
 		if (playerpoints >= 10 && KKKK.GlobalPosition.X < 340)
 		{
-			KKKK.GlobalPosition += dir*(float)delta*200;
+			// Manejo de sons
+			if (audioactivade == false)
+			{
+				 steps.Play();
+				 audioactivade = true;
+			}
+			// Manipulação de movimento
+			KKKK.GlobalPosition += dir*(float)delta*50;
 			dir.X = 1;
 			Bola.dir.Y = 0;
 		 	Bola.dir.X = 0;
 		}
-		if (KKKK.GlobalPosition.X >= 340) Rafa.Text = "O Looney venceu!";
+		if (KKKK.GlobalPosition.X >= 340)
+		{
+			Rafa.Text = "O Looney venceu!";
+			audioactivade = false;
+		}
 		//Evento (Bot)
 		if (inipoints >= 10 && Bot.GlobalPosition.X > 800)
 		{
-			Bot.GlobalPosition += dir*(float)delta*200;
+			// Manejo de sons
+			if (audioactivade == false)
+			{
+				 steps.Play();
+				 audioactivade = true;
+			}
+			Bot.GlobalPosition += dir*(float)delta*50;
 			dir.X = -1;
 			Bola.dir.Y = 0;
 		 	Bola.dir.X = 0;
 		}
-		if (Bot.GlobalPosition.X <= 800) Ia.Text = "Ia pronta pra \n dominar o mundo";
+		if (Bot.GlobalPosition.X <= 800)
+		{
+			audioactivade = false;
+			 if (multiplayer == false) Ia.Text = "Ia pronta pra \n dominar o mundo";
+			 if (multiplayer == true) Ia.Text = "...Eeeh,\n ele ganhou";
+		}
+	}
+
+	// Quando o som step acabar
+	void _on_steps_finished()
+	{
+		if (audioactivade == true) steps.Play();
 	}
 }

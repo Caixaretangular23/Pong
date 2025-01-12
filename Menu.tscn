@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://o532lbisj5xn"]
+[gd_scene load_steps=13 format=3 uid="uid://o532lbisj5xn"]
 
-[ext_resource type="Script" path="res://Menu.cs" id="1_2pvku"]
+[ext_resource type="Script" path="res://Scripts/Menu.cs" id="1_2pvku"]
 [ext_resource type="FontFile" uid="uid://doru6fpyi23mu" path="res://Mega.ttf" id="1_p5nsh"]
-[ext_resource type="Script" path="res://Play.cs" id="2_5824o"]
+[ext_resource type="Script" path="res://Scripts/Play.cs" id="2_5824o"]
+[ext_resource type="Script" path="res://Scripts/Play2.cs" id="4_vwgr7"]
 
 [sub_resource type="Theme" id="Theme_4psu4"]
 default_font = ExtResource("1_p5nsh")
@@ -51,6 +52,23 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_g6n1x")
 text = "Jogar"
 script = ExtResource("2_5824o")
 
+[node name="Play2" type="Button" parent="."]
+offset_left = 475.0
+offset_top = 376.0
+offset_right = 677.0
+offset_bottom = 432.0
+theme = SubResource("Theme_4psu4")
+theme_override_colors/font_hover_color = Color(0.823529, 0.882353, 0.968627, 1)
+theme_override_colors/font_pressed_color = Color(0.823529, 0.882353, 0.968627, 1)
+theme_override_colors/font_focus_color = Color(0.0156863, 0.0235294, 0.117647, 1)
+theme_override_colors/font_color = Color(0.0156863, 0.0235294, 0.117647, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_a32wq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3lhob")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tais4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_g6n1x")
+text = "Multiplayer"
+script = ExtResource("4_vwgr7")
+
 [node name="Gamename" type="Label" parent="."]
 offset_left = 390.0
 offset_top = 116.0
@@ -71,3 +89,4 @@ text = "-Quem fizer 10 pontos primeiro vence
 label_settings = SubResource("LabelSettings_eb530")
 
 [connection signal="pressed" from="Play" to="Play" method="_on_pressed"]
+[connection signal="pressed" from="Play2" to="Play2" method="_on_pressed"]

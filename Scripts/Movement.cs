@@ -3,7 +3,6 @@ using System;
 
 public partial class Movement : CharacterBody2D
 {
-
 	float speed = 500;
 	public override void _Ready()
 	{

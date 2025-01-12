@@ -1,16 +1,16 @@
-[gd_scene load_steps=19 format=3 uid="uid://kgaj5p2l71ut"]
+[gd_scene load_steps=19 format=3 uid="uid://b67x11wjfj8rr"]
 
-[ext_resource type="Script" path="res://Scripts/Game.cs" id="1_mabqd"]
-[ext_resource type="Script" path="res://Scripts/Movement.cs" id="1_wu73j"]
-[ext_resource type="Script" path="res://Scripts/Ball.cs" id="2_3ndkh"]
-[ext_resource type="Script" path="res://Scripts/Inimie.cs" id="2_n7k5x"]
-[ext_resource type="AudioStream" uid="uid://d06jg71ng45lc" path="res://Sounds/Pop.mp3" id="4_1fkcm"]
-[ext_resource type="FontFile" uid="uid://doru6fpyi23mu" path="res://Mega.ttf" id="4_lnqn8"]
-[ext_resource type="AudioStream" uid="uid://dtjsxwxmj35ga" path="res://Sounds/WIN.mp3" id="5_x2q55"]
-[ext_resource type="AudioStream" uid="uid://bfgkgkq3daeah" path="res://Sounds/LOST.mp3" id="6_7i5is"]
-[ext_resource type="Texture2D" uid="uid://dy44itvcf1r28" path="res://Imagens/O comedor de natai.png" id="9_rmlp5"]
-[ext_resource type="AudioStream" uid="uid://cjdixc8uwsyeo" path="res://Sounds/Stepstone.wav" id="10_bmb3y"]
-[ext_resource type="Texture2D" uid="uid://v4wbl3ymwcqk" path="res://Imagens/R (1).png" id="10_k7gne"]
+[ext_resource type="Script" path="res://Scripts/Game.cs" id="1_6cv0n"]
+[ext_resource type="Script" path="res://Scripts/Movement.cs" id="2_no872"]
+[ext_resource type="Script" path="res://Scripts/Ball.cs" id="3_wdbt6"]
+[ext_resource type="AudioStream" uid="uid://d06jg71ng45lc" path="res://Sounds/Pop.mp3" id="4_fqfkk"]
+[ext_resource type="AudioStream" uid="uid://dtjsxwxmj35ga" path="res://Sounds/WIN.mp3" id="5_k6d1y"]
+[ext_resource type="AudioStream" uid="uid://bfgkgkq3daeah" path="res://Sounds/LOST.mp3" id="6_3ooxr"]
+[ext_resource type="Script" path="res://Scripts/Player2.cs" id="7_k6l5q"]
+[ext_resource type="FontFile" uid="uid://doru6fpyi23mu" path="res://Mega.ttf" id="8_up85e"]
+[ext_resource type="Texture2D" uid="uid://dy44itvcf1r28" path="res://Imagens/O comedor de natai.png" id="9_jy603"]
+[ext_resource type="Texture2D" uid="uid://dhdhdhcu4oego" path="res://Imagens/Medo.jpg" id="10_c1dwa"]
+[ext_resource type="AudioStream" uid="uid://cjdixc8uwsyeo" path="res://Sounds/Stepstone.wav" id="10_prhub"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_oql2j"]
 
@@ -25,16 +25,16 @@ size = Vector2(20, 236)
 size = Vector2(26, 26)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7d6k3"]
-font = ExtResource("4_lnqn8")
+font = ExtResource("8_up85e")
 font_size = 70
 font_color = Color(0.823529, 0.882353, 0.968627, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_sis01"]
-font = ExtResource("4_lnqn8")
+font = ExtResource("8_up85e")
 font_size = 120
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_mabqd")
+script = ExtResource("1_6cv0n")
 
 [node name="Line" type="Sprite2D" parent="."]
 modulate = Color(0.823529, 0.882353, 0.968627, 0.698039)
@@ -44,7 +44,7 @@ texture = SubResource("CanvasTexture_oql2j")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(60, 317)
-script = ExtResource("1_wu73j")
+script = ExtResource("7_k6l5q")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 modulate = Color(0.823148, 0.884226, 0.967732, 1)
@@ -58,7 +58,7 @@ shape = SubResource("RectangleShape2D_pofso")
 
 [node name="Ball" type="Area2D" parent="."]
 position = Vector2(560, 317)
-script = ExtResource("2_3ndkh")
+script = ExtResource("3_wdbt6")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ball"]
 modulate = Color(0.823529, 0.882353, 0.968627, 1)
@@ -71,19 +71,19 @@ position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_mp5kq")
 
 [node name="Pop" type="AudioStreamPlayer" parent="Ball"]
-stream = ExtResource("4_1fkcm")
+stream = ExtResource("4_fqfkk")
 
 [node name="Win" type="AudioStreamPlayer" parent="Ball"]
-stream = ExtResource("5_x2q55")
+stream = ExtResource("5_k6d1y")
 volume_db = 17.0
 
 [node name="Lost" type="AudioStreamPlayer" parent="Ball"]
-stream = ExtResource("6_7i5is")
+stream = ExtResource("6_3ooxr")
 volume_db = 17.0
 
 [node name="Inimie" type="CharacterBody2D" parent="."]
 position = Vector2(1086, 300)
-script = ExtResource("2_n7k5x")
+script = ExtResource("2_no872")
 
 [node name="Sprite2D" type="Sprite2D" parent="Inimie"]
 modulate = Color(0.823529, 0.882353, 0.968627, 1)
@@ -116,7 +116,7 @@ horizontal_alignment = 1
 [node name="OComedorDeNatais" type="Sprite2D" parent="."]
 position = Vector2(-228, 333)
 scale = Vector2(0.199063, 0.197917)
-texture = ExtResource("9_rmlp5")
+texture = ExtResource("9_jy603")
 
 [node name="Win" type="Label" parent="OComedorDeNatais"]
 offset_left = -969.544
@@ -126,13 +126,13 @@ offset_bottom = 967.526
 label_settings = SubResource("LabelSettings_sis01")
 
 [node name="Steps" type="AudioStreamPlayer" parent="OComedorDeNatais"]
-stream = ExtResource("10_bmb3y")
+stream = ExtResource("10_prhub")
 volume_db = 15.0
 
 [node name="R" type="Sprite2D" parent="."]
-position = Vector2(1335, 353)
-scale = Vector2(0.320335, 0.325837)
-texture = ExtResource("10_k7gne")
+position = Vector2(1351.36, 336.524)
+scale = Vector2(0.38643, 0.384157)
+texture = ExtResource("10_c1dwa")
 
 [node name="Label" type="Label" parent="R"]
 offset_left = -558.79

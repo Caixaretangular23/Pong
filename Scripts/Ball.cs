@@ -14,6 +14,7 @@ public partial class Ball : Area2D
 	// Referencia
 	Node Room;
 	Game master;
+	Game Controll;
 	// Componenetes de sons
 	AudioStreamPlayer poping;
 	AudioStreamPlayer losted;
@@ -33,6 +34,7 @@ public partial class Ball : Area2D
 		// Configuração de node Com o inimigo
 		Node gamenode = GetNode("/root/Game");
 		Room = gamenode.GetNode<Node2D>("Inimie");
+		Controll = GetNode<Game>("/root/Game");
 
 		//Configurando o node dos sons
 		poping = GetNode<AudioStreamPlayer>("Pop");
@@ -64,7 +66,11 @@ public partial class Ball : Area2D
 			if (GlobalPosition.X < 0)
 			{
 				master.inipoints++;
-				losted.Play();
+				if (Controll.multiplayer == false) losted.Play();
+				else
+				{
+					winner.Play();
+				}
 			} 
 			// Resetando pos
 			rY = myY.Next(-1,1);
